@@ -2,7 +2,6 @@
 #define BLOCK_H
 #include <iostream>
 
-
 class Block {
 
 private:
@@ -15,12 +14,19 @@ private:
     int         	relayed_by;    // Miner ID
 
 
-public:
-    Block(unsigned int prev_hash,int height,int difficulty);
-    
-    
+    public:
+
+    Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash,int relayed_by);
+    Block(Block& block)=default;
+    unsigned int get_hash();
+    int get_difficulty();
+    int get_height();
+
+
+
+
+
+
 }; 
-
-
 
 #endif //BLOCK_H
