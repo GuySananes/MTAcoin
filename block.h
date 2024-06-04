@@ -1,10 +1,11 @@
-
+#ifndef BLOCK_H
+#define BLOCK_H
 #include <iostream>
 
-
+//TEST COMMIT
 class Block {
 
-    private:
+private:
     int         	height;        // Incrementeal ID of the block in the chain
     int         	timestamp;    // Time of the mine in seconds since epoch
     unsigned int    hash;        // Current block hash value
@@ -14,7 +15,7 @@ class Block {
     int         	relayed_by;    // Miner ID
 
 
-    public:
+public:
     Block(unsigned int prev_hash,int height,int difficulty);
     
     
@@ -22,3 +23,4 @@ class Block {
 
 
 
+#endif
