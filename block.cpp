@@ -1,7 +1,7 @@
-
+#pragma once
 #include "block.h"
 
-Block::Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash,int relayed_by)
+Block::Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash,int relayed_by,int timestamp)
 {
     this->prev_hash=prev_hash;
     this->height=height;
@@ -9,6 +9,7 @@ Block::Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash
     this->nonce;
     this->hash;
     this->relayed_by;
+    this->timestamp = timestamp;
 }
 unsigned int Block::get_hash()
  {
@@ -27,8 +28,11 @@ void Block::set_difficulty(int difficulty)
     this->difficulty=difficulty;
 }
 int Block::get_relayed_by()
+
 {
     return relayed_by;
+} 
+int Block::get_nonce()
+{
+    return nonce; 
 }
-    
-

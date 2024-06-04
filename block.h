@@ -1,6 +1,6 @@
-#ifndef BLOCK_H
-#define BLOCK_H
+#pragma once
 #include <iostream>
+
 
 class Block {
 
@@ -14,21 +14,15 @@ private:
     int         	relayed_by;    // Miner ID
 
 
-    public:
-
-    Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash,int relayed_by);
+public:
+    Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash,int relayed_by,int timestamp);
     Block(Block& block)=default;
-    unsigned int get_hash();
+    void set_difficulty(int difficulty);
     int get_difficulty();
     int get_height();
     int get_relayed_by();
-    void set_difficulty(int difficulty);
-
-
-
-
-
+    int get_nonce();
+    unsigned int get_hash();
 
 }; 
 
-#endif //BLOCK_H

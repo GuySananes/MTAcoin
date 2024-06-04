@@ -1,9 +1,8 @@
-#ifndef SERVER_H
-#define SERVER_H
-
+#pragma once
 #include <iostream>
 #include <list>
 #include "block.h"
+#include <zlib.h>
 
 class Server
 {
@@ -20,10 +19,8 @@ public:
     // Constructor
     Server(int difficulty_target);
     
-    bool verify_proof_of_work(/*some hash*/);
-    void init_first_block();
+    bool verify_proof_of_work();
     void print_last_block();
+    void add_block();
 
 };  
-
-#endif //SERVER_H

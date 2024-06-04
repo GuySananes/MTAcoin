@@ -1,22 +1,30 @@
+#pragma once
 #include <iostream>
 #include "block.h"
+#include "server.h"
+#include <math.h>
+#include <zlib.h>
+#include <ctime>
 
 class miner
 {
 private:
-    //Block* last_block;
     int id;
     int difficulty_target;
+    unsigned int last_hash;
     int height_target;
     int nonce=0;
-    unsigned int difficulty_mask;
+    unsigned int max_hash_val; //we need to check 0s, we want the max number that has these 0s at the start 
+    time_t timestamp;
     
 public:
 
     miner(int id);
     void update_target_parameters();
     void start_mining();
-    bool mined_success();
+    bool mined_success(const unsigned int crc_res);
+    unsigned int calculte_hash_code();
+
     
 };
 
