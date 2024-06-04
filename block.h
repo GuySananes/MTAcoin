@@ -2,7 +2,7 @@
 #define BLOCK_H
 #include <iostream>
 
-//TEST COMMIT
+
 class Block {
 
 private:
@@ -23,4 +23,4 @@ public:
 
 
 
-#endif
+#endif //BLOCK_H

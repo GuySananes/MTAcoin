@@ -2,10 +2,10 @@
 #include <iostream>
 #include "server.h"
 
-int main(int argc,char*argv[])
+int main(int argc,char* argv[])
 {
 
-    Server server(argc); 
+    Server server(argv[1] % 32);
     return 0;
 
 
