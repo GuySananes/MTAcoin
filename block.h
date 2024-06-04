@@ -21,6 +21,8 @@ private:
     unsigned int get_hash();
     int get_difficulty();
     int get_height();
+    int get_relayed_by();
+    void set_difficulty(int difficulty);
 
 
 

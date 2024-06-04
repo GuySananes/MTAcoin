@@ -24,8 +24,6 @@ public:
     void init_first_block();
     void print_last_block();
 
-
-
 };  
 
 #endif //SERVER_H

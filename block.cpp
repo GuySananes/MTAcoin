@@ -22,6 +22,13 @@ int Block::get_height()
 {
     return height;
 }
-        
+void Block::set_difficulty(int difficulty)
+{
+    this->difficulty=difficulty;
+}
+int Block::get_relayed_by()
+{
+    return relayed_by;
+}
     
 
