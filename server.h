@@ -3,7 +3,7 @@
 #include <list>
 #include "block.h"
 #include <zlib.h>
-
+#include "global.h"
 class Server
 {
 private:
@@ -22,5 +22,6 @@ public:
     bool verify_proof_of_work();
     void print_last_block();
     void add_block();
+    void start();
 
 };  

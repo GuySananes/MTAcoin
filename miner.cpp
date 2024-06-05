@@ -3,9 +3,9 @@
 
 
 
-miner::miner(int id):id(id){}
+Miner::Miner(int id):id(id){}
 
-void miner::update_target_parameters()
+void Miner::update_target_parameters()
 {
    difficulty_target=Server::block_chain.front().get_difficulty();
    height_target=Server::block_chain.front().get_height() +1;
@@ -14,7 +14,7 @@ void miner::update_target_parameters()
 }
 
 
-unsigned int miner::calculte_hash_code()
+unsigned int Miner::calculte_hash_code()
 {
     timestamp = std::time(nullptr);
     std::string data_to_hash = std::to_string(nonce) + std::to_string(timestamp) + std::to_string(last_hash) + std::to_string(id);
@@ -24,7 +24,7 @@ unsigned int miner::calculte_hash_code()
 
 }
 
-void miner::start_mining() //need thread things.
+void Miner::start_mining() //need thread things.
 {
     while(true)
     {
@@ -40,7 +40,12 @@ void miner::start_mining() //need thread things.
     }
 }
 
-bool miner::mined_success(const unsigned int crc_res)
+bool Miner::mined_success(const unsigned int crc_res)
 {
     return (crc_res<=max_hash_val);
+}
+
+int Miner::get_id()
+{
+    return id;
 }
