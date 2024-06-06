@@ -35,7 +35,7 @@ int main(int argc,char* argv[])
 
     for(int i=0;i<NUMBERS_OF_MINERS;++i)
         *miners[i]=Miner(i);
-    
+
     pthread_create(&server_thread,nullptr,&server_thread_start,&server);
 
     for(int i=0;i<NUMBERS_OF_MINERS;++i)
@@ -51,7 +51,7 @@ int main(int argc,char* argv[])
 
 
     //free/delete all the threads 
-
+    
     return 0;
 
 

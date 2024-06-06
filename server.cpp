@@ -1,5 +1,4 @@
 
-
 #pragma once
 #include "server.h"
 #include <iostream>
@@ -39,7 +38,6 @@ bool Server::verify_proof_of_work()
         return false;
 
     return true; //if we survived all the checks.
-
 }
 
 
@@ -52,19 +50,13 @@ void Server::add_block()
 }
 
 void Server::start()
-{
-    
+{    
     pthread_mutex_lock(&mutex);
     pthread_cond_wait(&cond,&mutex); //waiting for a block to check
     if(verify_proof_of_work())
     {
         add_block();
+        //tell every miner that there is a new block (?) signal? 
     }
-
     pthread_mutex_unlock(&mutex);
-
-
-
-
-
 }
