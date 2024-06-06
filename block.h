@@ -23,6 +23,8 @@ public:
     int get_relayed_by();
     int get_nonce();
     unsigned int get_hash();
+    unsigned int get_prev_hash();
+    int get_timestamp();
 
 }; 
 

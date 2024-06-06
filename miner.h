@@ -5,8 +5,8 @@
 #include <math.h>
 #include <zlib.h>
 #include <ctime>
-
-class miner
+#include "global.h"
+class Miner
 {
 private:
     int id;
@@ -19,11 +19,12 @@ private:
     
 public:
 
-    miner(int id);
+    Miner(int id);
     void update_target_parameters();
     void start_mining();
     bool mined_success(const unsigned int crc_res);
-    unsigned int calculte_hash_code();
+    unsigned int calculate_hash_code();
+    int get_id();
 
     
 };
