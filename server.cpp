@@ -51,6 +51,10 @@ void Server::add_block(Block & block_to_add) //addint to block_chain. making sur
     ++number_of_blocks;
     //calling the print function 
     print_last_block(block_to_add);
+    if(block_chain.size() == MAX_CHAIN_SIZE)
+    {
+        block_chain.pop_back();
+    }
     pthread_mutex_unlock(&bl_lock);
 }
 

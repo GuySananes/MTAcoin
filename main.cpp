@@ -32,13 +32,13 @@ int main(int argc,char* argv[])
     pthread_mutex_init(&mutex,nullptr);
     pthread_cond_init(&cond,nullptr);
 
-    Server server(5); //1 server
+    Server* server = new Server(20) ; //1 server
     Miner* miners[NUMBERS_OF_MINERS]; //5 miners -> the 5th is the fake_miner.
 
     for(int i=0;i<NUMBERS_OF_MINERS-1;++i)
-        *miners[i]=Miner(i);
+        miners[i]= new Miner(i);
 
-    pthread_create(&server_thread,nullptr,&server_thread_start,&server);
+    pthread_create(&server_thread,nullptr,&server_thread_start,server);
 
     for(int i=0;i<NUMBERS_OF_MINERS;++i)
         pthread_create(&real_miner[i],nullptr,&miner_thread_start,miners[i]);

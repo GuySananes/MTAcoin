@@ -28,7 +28,7 @@ void Miner::start_mining() //need thread things.
         if(height_target-1 != Server::block_chain.front().get_height()) 
             update_target_parameters();
         
-        unsigned int crc_res = calculate_hash_code(); //this also updats the timestamp
+        unsigned int crc_res = calculate_hash_code(); //this also updates the timestamp
         bool hit = mined_success(crc_res);
 
         if(hit) //update the server "socket" or "mail-box"

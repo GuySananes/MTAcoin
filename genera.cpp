@@ -1,5 +1,5 @@
 #include "global.h"
-
+#include "zlib.h"
 
 unsigned int hash(int height,int nonce, time_t timestamp, unsigned int last_hash,int id)
 {
