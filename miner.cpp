@@ -3,15 +3,18 @@
 
 
 
-Miner::Miner(int id):id(id){}
+Miner::Miner(int id)
+{
+    this->id = id;
+}
 
 void Miner::update_target_parameters()
 {
    difficulty_target=Server::block_chain.front().get_difficulty();
    height_target=Server::block_chain.front().get_height() +1;
    last_hash=Server::block_chain.front().get_hash();
-   max_hash_val = max_hash_calculator(difficulty_target);
-   nonce =0;
+   mask = mask_hash_validation(difficulty_target);
+   nonce = 0;
 }
 
 
@@ -37,17 +40,18 @@ void Miner::start_mining() //need thread things.
             <<" mined a new Block #"<<height_target
             <<", With the hash "<<crc_res<<std::endl;
             Server::next_block= Block(last_hash,height_target,difficulty_target,nonce,crc_res,id,static_cast<int>(timestamp)); 
-            pthread_cond_broadcast(&cond); // in case there is more than 1 server..
-                                            //we could use signal because only 1 server is waiting.
+            pthread_cond_signal(&cond);
+            sleep(0.1);
         }
         else
             ++nonce;
+        //sleep(1);
     } 
 }
 
-bool Miner::mined_success(const unsigned int crc_res)
+bool Miner::mined_success(const unsigned int crc_res) const
 {
-    return (crc_res<=max_hash_val);
+    return ((crc_res & mask) == 0);
 }
 
 int Miner::get_id()

@@ -10,7 +10,7 @@ class Server
 {
 private:
 
-    int number_of_blocks=0;
+    int number_of_blocks=1;
     int difficulty_target;    
     pthread_mutex_t bl_lock = PTHREAD_MUTEX_INITIALIZER;
 

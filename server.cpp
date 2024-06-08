@@ -32,19 +32,19 @@ bool Server::verify_proof_of_work(Block& block_to_check)
         return false;
 
     unsigned int hash_test = //this calculates the hash, again.. :) 
-        hash(block_to_check.get_height(),block_to_check.get_nonce(),static_cast<time_t>(block_to_check.get_timestamp()),
+        hash(block_to_check.get_height(),block_to_check.get_nonce(),(block_to_check.get_timestamp()),
              block_to_check.get_prev_hash(),block_to_check.get_relayed_by());
     
     if(hash_test!=block_to_check.get_hash())
         return false;
-    else if(hash_test<=max_hash_calculator(difficulty_target))
+    else if((hash_test & mask_hash_validation(difficulty_target)) != 0)
         return false;
 
     return true; //if we survived all the checks.
 }
 
 
-void Server::add_block(Block & block_to_add) //addint to block_chain. making sure that its secure
+void Server::add_block(Block & block_to_add) //adding to block_chain. making sure that its secure
 {
     pthread_mutex_lock(&bl_lock);
     block_chain.push_front(block_to_add);
@@ -60,9 +60,9 @@ void Server::add_block(Block & block_to_add) //addint to block_chain. making sur
 
 void Server::start()
 {    
-    pthread_mutex_lock(&mutex);
+   // pthread_mutex_lock(&mutex);
 
-    pthread_cond_wait(&cond,&mutex); //waiting for a block to check
+    //pthread_cond_wait(&cond,&mutex); //waiting for a block to check
 
     Block curr_block_to_check = next_block;
 
@@ -71,5 +71,5 @@ void Server::start()
         add_block(curr_block_to_check);
     }
 
-    pthread_mutex_unlock(&mutex);
+    //pthread_mutex_unlock(&mutex);
 }

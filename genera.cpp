@@ -10,7 +10,7 @@ unsigned int hash(int height,int nonce, time_t timestamp, unsigned int last_hash
     return crc_res;
 }
 
-unsigned int max_hash_calculator(int difficulty)
+unsigned int mask_hash_validation(int difficulty)
 {
-    return static_cast<unsigned int>((std::pow(2,32-difficulty))-1);
+    return (1 << difficulty) - 1;
 }
