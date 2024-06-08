@@ -12,7 +12,7 @@ private:
 
     int number_of_blocks=0;
     int difficulty_target;    
-    pthread_mutex_t bl_lock;
+    pthread_mutex_t bl_lock = PTHREAD_MUTEX_INITIALIZER;
 
 public:
 

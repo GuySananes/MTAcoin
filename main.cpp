@@ -5,11 +5,11 @@
 #include <pthread.h> 
 #include "miner.h"
 
-#define NUMBERS_OF_MINERS 5
+#define NUMBERS_OF_MINERS 4
 
 bool flag=false;
-pthread_mutex_t mutex;
-pthread_cond_t cond;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
 
 void* server_thread_start(void* arg)
@@ -28,7 +28,7 @@ void* miner_thread_start(void* arg)
 
 int main(int argc,char* argv[])
 {
-    pthread_t server_thread, real_miner[4],fake_miner; // the fake miner will send wrong answers sometimes.
+    pthread_t server_thread, real_miner[4]; // the fake miner will send wrong answers sometimes.
     pthread_mutex_init(&mutex,nullptr);
     pthread_cond_init(&cond,nullptr);
 
