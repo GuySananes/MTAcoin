@@ -11,17 +11,19 @@ bool flag=false;
 pthread_mutex_t mutex;
 pthread_cond_t cond;
 
-//bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
 void* server_thread_start(void* arg)
 {
     Server* server= static_cast<Server*>(arg); 
     server->start();
+    return nullptr;
 }
 
 void* miner_thread_start(void* arg)
 {
     Miner* miner= static_cast<Miner*>(arg); 
     miner->start_mining();
+    return nullptr;
 }
 
 int main(int argc,char* argv[])
@@ -33,7 +35,7 @@ int main(int argc,char* argv[])
     Server server(5); //1 server
     Miner* miners[NUMBERS_OF_MINERS]; //5 miners -> the 5th is the fake_miner.
 
-    for(int i=0;i<NUMBERS_OF_MINERS;++i)
+    for(int i=0;i<NUMBERS_OF_MINERS-1;++i)
         *miners[i]=Miner(i);
 
     pthread_create(&server_thread,nullptr,&server_thread_start,&server);
@@ -42,13 +44,11 @@ int main(int argc,char* argv[])
         pthread_create(&real_miner[i],nullptr,&miner_thread_start,miners[i]);
 
     pthread_join(server_thread,nullptr);
-    pthread_join(fake_miner,nullptr);
+    //pthread_join(fake_miner,nullptr);
 
     for(int i=0;i<NUMBERS_OF_MINERS-1;++i)
         pthread_join(real_miner[i],nullptr);
     
- 
-
 
     //free/delete all the threads 
     

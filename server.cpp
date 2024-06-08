@@ -1,5 +1,4 @@
 
-#pragma once
 #include "server.h"
 #include <iostream>
 
@@ -14,25 +13,29 @@ Server::Server(int difficulty_target) : difficulty_target(difficulty_target)
     
 }
 
-void Server::print_last_block()
+void Server::print_last_block(Block& block_added)
 {
-
+   std::cout << "Server: New block added by Miner #" << block_added.get_relayed_by()
+                     << ", height(" << block_added.get_height() << "), timestamp(" << block_added.get_timestamp()
+                     << "), hash(0x" << std::hex << block_added.get_hash() << std::dec << "), prev_hash(0x"
+                     << std::hex << block_added.get_prev_hash() << std::dec << "), nonce(" 
+                     << block_added.get_nonce() << ")" << std::endl;
 }
 
-bool Server::verify_proof_of_work()
+bool Server::verify_proof_of_work(Block& block_to_check)
 {
-    if(next_block.get_difficulty()!=difficulty_target)
+    if(block_to_check.get_difficulty()!=difficulty_target)
         return false;
-    else if(next_block.get_height()!=number_of_blocks+1)
+    else if(block_to_check.get_height()!=number_of_blocks+1)
         return false;
-    else if(next_block.get_prev_hash()!=block_chain.front().get_hash())
+    else if(block_to_check.get_prev_hash()!=block_chain.front().get_hash())
         return false;
 
     unsigned int hash_test = //this calculates the hash, again.. :) 
-        hash(next_block.get_height(),next_block.get_nonce(),static_cast<time_t>(next_block.get_timestamp()),
-                 next_block.get_prev_hash(),next_block.get_relayed_by());
+        hash(block_to_check.get_height(),block_to_check.get_nonce(),static_cast<time_t>(block_to_check.get_timestamp()),
+             block_to_check.get_prev_hash(),block_to_check.get_relayed_by());
     
-    if(hash_test!=next_block.get_hash())
+    if(hash_test!=block_to_check.get_hash())
         return false;
     else if(hash_test<=max_hash_calculator(difficulty_target))
         return false;
@@ -41,22 +44,28 @@ bool Server::verify_proof_of_work()
 }
 
 
-void Server::add_block()
+void Server::add_block(Block & block_to_add) //addint to block_chain. making sure that its secure
 {
-    block_chain.push_front(next_block);
-    //signals for everyone that there is a new block 
+    pthread_mutex_lock(&bl_lock);
+    block_chain.push_front(block_to_add);
+    ++number_of_blocks;
     //calling the print function 
-    print_last_block();
+    print_last_block(block_to_add);
+    pthread_mutex_unlock(&bl_lock);
 }
 
 void Server::start()
 {    
     pthread_mutex_lock(&mutex);
+
     pthread_cond_wait(&cond,&mutex); //waiting for a block to check
-    if(verify_proof_of_work())
+
+    Block curr_block_to_check = next_block;
+
+    if(verify_proof_of_work(curr_block_to_check))
     {
-        add_block();
-        //tell every miner that there is a new block (?) signal? 
+        add_block(curr_block_to_check);
     }
+
     pthread_mutex_unlock(&mutex);
 }

@@ -1,4 +1,4 @@
-#pragma once
+
 #include "block.h"
 
 Block::Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash,int relayed_by,int timestamp)

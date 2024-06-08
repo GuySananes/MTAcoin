@@ -12,6 +12,7 @@ private:
 
     int number_of_blocks=0;
     int difficulty_target;    
+    pthread_mutex_t bl_lock;
 
 public:
 
@@ -21,9 +22,9 @@ public:
     // Constructor
     Server(int difficulty_target);
     
-    bool verify_proof_of_work();
-    void print_last_block();
-    void add_block();
+    bool verify_proof_of_work(Block & block_to_check);
+    void print_last_block(Block& block_added);
+    void add_block(Block & block_to_add);
     void start();
 
 };  
