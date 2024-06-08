@@ -1,6 +1,8 @@
-#include <pthread.h>
+#ifndef GLOBAL_H
+#define GLOBAL_H
+#include "main.h"
 
-extern pthread_mutex_t mutex;
+//extern pthread_mutex_t mutex;
 extern pthread_cond_t cond;
 extern bool flag; //if the server is checking a miner's answer. 
 
@@ -15,5 +17,6 @@ unsigned int hash(int height,int nonce, time_t timestamp, unsigned int last_hash
 
 unsigned int max_hash_calculator(int difficulty)
 {
-    return static_cast<unsigned int>((std::pow(2,32-difficulty))-1);
+    return static_cast<unsigned int>((pow(2,32-difficulty))-1);
 }
+#endif //GLOBAL_H

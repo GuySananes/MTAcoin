@@ -1,33 +1,34 @@
-#pragma once
-#include "block.h"
+/*
+#include "BLOCK.h"
 
-Block::Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash,int relayed_by,int timestamp)
+BLOCK::BLOCK(int height,int timestamp, int hash, unsigned int prev_hash,int difficulty,int nonce,int relayed_by)
 {
-    this->prev_hash=prev_hash;
     this->height=height;
+    this->timestamp = timestamp;
+    this->hash=hash;
+    this->prev_hash=prev_hash;
     this->difficulty=difficulty;
     this->nonce=nonce;
-    this->hash=hash;
     this->relayed_by=relayed_by;
-    this->timestamp = timestamp;
+
 }
-unsigned int Block::get_hash()
+unsigned int BLOCK::get_hash() const
  {
     return hash;
  }
-int Block::get_difficulty()
+int BLOCK::get_difficulty() const
 {
     return difficulty;
 }
-int Block::get_height()
+int BLOCK::get_height() const
 {
     return height;
 }
-void Block::set_difficulty(int difficulty)
+void BLOCK::set_difficulty(int diff)
 {
-    this->difficulty=difficulty;
+    this->difficulty = diff;
 }
-int Block::get_relayed_by()
+int BLOCK::get_relayed_by() const
 
 {
     return relayed_by;

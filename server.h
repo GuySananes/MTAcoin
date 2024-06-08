@@ -1,9 +1,8 @@
-#pragma once
-#include <iostream>
-#include <list>
-#include "block.h"
-#include <zlib.h>
-#include "global.h"
+#ifndef SERVER_H
+#define  SERVER_H
+
+#include "main.h"
+#include "BLOCK.h"
 
 
 class Server
@@ -15,11 +14,11 @@ private:
 
 public:
 
-    static std::list<Block> block_chain;
-    static Block next_block;
+    static std::list<BLOCK> block_chain;
+    static BLOCK next_block;
 
     // Constructor
-    Server(int difficulty_target);
+    explicit Server(int difficulty_target);
     
     bool verify_proof_of_work();
     void print_last_block();

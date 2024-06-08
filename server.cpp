@@ -1,11 +1,9 @@
-
-
-#pragma once
 #include "server.h"
+#include "global.h"
 #include <iostream>
 
-std::list<Block> Server::block_chain;
-Block Server::next_block = Block(0,1,0,0,0,0,0); //first dummy block. start of the chain , height is 1 
+std::list<BLOCK> Server::block_chain;
+BLOCK Server::next_block = BLOCK(0,1,0,0,0,0,0); //first dummy BLOCK. start of the chain , height is 1
 
 //create one dummy node 
 Server::Server(int difficulty_target) : difficulty_target(difficulty_target) 
@@ -29,7 +27,7 @@ bool Server::verify_proof_of_work()
     else if(next_block.get_prev_hash()!=block_chain.front().get_hash())
         return false;
 
-    unsigned int hash_test = //this calculates the hash, again.. :) 
+    unsigned int hash_test = //this calculates the hash, again.. :)
         hash(next_block.get_height(),next_block.get_nonce(),static_cast<time_t>(next_block.get_timestamp()),
                  next_block.get_prev_hash(),next_block.get_relayed_by());
     
@@ -39,32 +37,25 @@ bool Server::verify_proof_of_work()
         return false;
 
     return true; //if we survived all the checks.
-
 }
 
 
 void Server::add_block()
 {
     block_chain.push_front(next_block);
-    //signals for everyone that there is a new block 
+    //signals for everyone that there is a new BLOCK
     //calling the print function 
     print_last_block();
 }
 
 void Server::start()
 {
-    
     pthread_mutex_lock(&mutex);
-    pthread_cond_wait(&cond,&mutex); //waiting for a block to check
+    pthread_cond_wait(&cond,&mutex); //waiting for a BLOCK to check
     if(verify_proof_of_work())
     {
         add_block();
+        //tell every miner that there is a new BLOCK (?) signal?
     }
-
     pthread_mutex_unlock(&mutex);
-
-
-
-
-
 }

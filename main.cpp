@@ -16,12 +16,14 @@ void* server_thread_start(void* arg)
 {
     Server* server= static_cast<Server*>(arg); 
     server->start();
+    return nullptr;
 }
 
 void* miner_thread_start(void* arg)
 {
     Miner* miner= static_cast<Miner*>(arg); 
     miner->start_mining();
+    return nullptr;
 }
 
 int main(int argc,char* argv[])
