@@ -2,8 +2,18 @@
 #include "server.h"
 #include <iostream>
 
+//static
 std::list<Block> Server::block_chain;
-Block Server::next_block;//first dummy block. start of the chain , height is 1
+Block Server::next_block; //first dummy block. start of the chain , height is 1 
+
+
+void* Server::server_thread_start(void* arg)
+{
+    Server* server= static_cast<Server*>(arg); 
+    server->start();
+    return nullptr; //only for the void* to work. it wount return null ever.
+}
+
 
 //create one dummy node 
 Server::Server(int difficulty_target) : difficulty_target(difficulty_target)
@@ -15,8 +25,8 @@ Server::Server(int difficulty_target) : difficulty_target(difficulty_target)
 
 void Server::print_last_block(Block& block_added)
 {
-   std::cout << "Server: New block added by Miner #" << block_added.get_relayed_by()
-                     << ", height(" << block_added.get_height() << "), timestamp(" << block_added.get_timestamp()
+   std::cout << "Server: New block added by Miner #" << std::dec << block_added.get_relayed_by()
+                     << ", height(" <<std::dec << block_added.get_height() << "), timestamp(" << block_added.get_timestamp()
                      << "), hash(0x" << std::hex << block_added.get_hash() << std::dec << "), prev_hash(0x"
                      << std::hex << block_added.get_prev_hash() << std::dec << "), nonce(" 
                      << block_added.get_nonce() << ")" << std::endl;
@@ -60,16 +70,15 @@ void Server::add_block(Block & block_to_add) //adding to block_chain. making sur
 
 void Server::start()
 {    
-   // pthread_mutex_lock(&mutex);
-
-    //pthread_cond_wait(&cond,&mutex); //waiting for a block to check
-
-    Block curr_block_to_check = next_block;
-
-    if(verify_proof_of_work(curr_block_to_check))
+    while(true)
     {
-        add_block(curr_block_to_check);
-    }
+        pthread_mutex_lock(&mutex);
+        pthread_cond_wait(&cond,&mutex); //waiting for a block to check
+        Block curr_block_to_check = next_block; //copying the block
 
-    //pthread_mutex_unlock(&mutex);
+        if(verify_proof_of_work(curr_block_to_check))
+            add_block(curr_block_to_check);
+
+        pthread_mutex_unlock(&mutex);
+    }
 }

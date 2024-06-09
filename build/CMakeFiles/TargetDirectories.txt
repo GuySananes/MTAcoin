@@ -1,0 +1,3 @@
+/home/alon/Desktop/Task2_mtaCoin/build/CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir
+/home/alon/Desktop/Task2_mtaCoin/build/CMakeFiles/edit_cache.dir
+/home/alon/Desktop/Task2_mtaCoin/build/CMakeFiles/rebuild_cache.dir

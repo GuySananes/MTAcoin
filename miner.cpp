@@ -1,12 +1,15 @@
 
 #include "miner.h"
 
-
-
-Miner::Miner(int id)
+void* Miner::miner_thread_start(void* arg)
 {
-    this->id = id;
+    Miner* miner= static_cast<Miner*>(arg); 
+    miner->start_mining();
+    return nullptr; //only for the void* to work. it wount return null ever.
 }
+
+Miner::Miner(int id):id(id){}
+
 
 void Miner::update_target_parameters()
 {
@@ -14,13 +17,12 @@ void Miner::update_target_parameters()
    height_target=Server::block_chain.front().get_height() +1;
    last_hash=Server::block_chain.front().get_hash();
    mask = mask_hash_validation(difficulty_target);
-   nonce = 0;
+   nonce = 0; //init nonce
 }
-
 
 unsigned int Miner::calculate_hash_code()
 {
-    timestamp = std::time(nullptr);
+    timestamp = std::time(nullptr); //take the currect time since 1970 (unix epoch)
     return hash(height_target,nonce,timestamp,last_hash,id);
 }
 
@@ -38,14 +40,14 @@ void Miner::start_mining() //need thread things.
         {
             std::cout<<"Miner #"<<id
             <<" mined a new Block #"<<height_target
-            <<", With the hash "<<crc_res<<std::endl;
+            <<", With the hash 0x"<<std::hex<<crc_res<<std::endl;
             Server::next_block= Block(last_hash,height_target,difficulty_target,nonce,crc_res,id,static_cast<int>(timestamp)); 
             pthread_cond_signal(&cond);
             sleep(0.1);
         }
         else
             ++nonce;
-        //sleep(1);
+       
     } 
 }
 
