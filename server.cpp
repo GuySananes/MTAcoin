@@ -35,20 +35,35 @@ void Server::print_last_block(Block& block_added)
 bool Server::verify_proof_of_work(Block& block_to_check)
 {
     if(block_to_check.get_difficulty()!=difficulty_target)
+    {
+        std::cout<<"The Difficulty is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
+    }
     else if(block_to_check.get_height()!=number_of_blocks+1)
+    {
+        std::cout<<"Server: clThe Height is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
+    }
     else if(block_to_check.get_prev_hash()!=block_chain.front().get_hash())
+    {
+        std::cout<<"Server: The prev_hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
+    }
 
     unsigned int hash_test = //this calculates the hash, again.. :) 
         hash(block_to_check.get_height(),block_to_check.get_nonce(),(block_to_check.get_timestamp()),
              block_to_check.get_prev_hash(),block_to_check.get_relayed_by());
     
     if(hash_test!=block_to_check.get_hash())
+    {
+        std::cout<<"Server: The Hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
+    }
     else if((hash_test & mask_hash_validation(difficulty_target)) != 0)
+    {
+        std::cout<<"Server: The Hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
+    }
 
     return true; //if we survived all the checks.
 }

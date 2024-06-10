@@ -1,5 +1,8 @@
 
 #include "miner.h"
+#include <pthread.h>
+
+
 
 void* Miner::miner_thread_start(void* arg)
 {
@@ -28,6 +31,7 @@ unsigned int Miner::calculate_hash_code()
 
 void Miner::start_mining() //need thread things.
 {
+    
     while(true)
     {   
         if(height_target-1 != Server::block_chain.front().get_height()) 
@@ -38,12 +42,17 @@ void Miner::start_mining() //need thread things.
 
         if(hit) //update the server "socket" or "mail-box"
         {
+            
+            //maybe add mutex? 
             std::cout<<"Miner #"<<id
-            <<" mined a new Block #"<<height_target
+            <<" mined a new Block #"<<std::dec<<height_target
             <<", With the hash 0x"<<std::hex<<crc_res<<std::endl;
             Server::next_block= Block(last_hash,height_target,difficulty_target,nonce,crc_res,id,static_cast<int>(timestamp)); 
             pthread_cond_signal(&cond);
+            
             sleep(0.1);
+            
+            //maybe free mutex?c
         }
         else
             ++nonce;

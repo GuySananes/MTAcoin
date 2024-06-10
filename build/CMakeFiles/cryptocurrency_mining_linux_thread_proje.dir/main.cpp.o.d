@@ -176,4 +176,4 @@ CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
  /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
  /home/alon/Desktop/Task2_mtaCoin/miner.h /usr/include/c++/13/math.h \
- /usr/include/c++/13/ctime
+ /usr/include/c++/13/ctime /home/alon/Desktop/Task2_mtaCoin/fakeMiner.h
