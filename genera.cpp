@@ -9,10 +9,3 @@ unsigned int hash(int height,int nonce, time_t timestamp, unsigned int last_hash
     //reinterpret cast is used to cast the pointer.
     return crc_res;
 }
-
-/*
-unsigned int mask_hash_validation(int difficulty)
-{
-   unsigned int mask = ~(~0U >> (difficulty+1));
-    return mask; 
-}*/

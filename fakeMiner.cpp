@@ -1,7 +1,7 @@
 #include "fakeMiner.h"
 
 
-void fakeMiner::start_mining() 
+[[noreturn]] void fakeMiner::start_mining()
 {
     while(true)
     {   
@@ -12,9 +12,9 @@ void fakeMiner::start_mining()
         std::cout << "Miner #" << id
         << " mined a new Block #" << std::dec << height_target
         << ", With the hash 0x" << std::hex << fake_hash << std::endl;
-        pthread_mutex_unlock(&print_lock);
 
         auto new_block = Block(last_hash,height_target,difficulty_target,nonce,fake_hash,id,static_cast<int>(timestamp));
+        pthread_mutex_unlock(&print_lock);
         my_server->check_new_block(new_block);
         sleep(1); //1 second delay.
     } 

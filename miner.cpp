@@ -43,10 +43,10 @@ void Miner::start_mining()
             std::cout<<"Miner #"<<id
             <<" mined a new Block #"<<std::dec<<height_target
             <<", With the hash 0x"<<std::hex<<crc_res<<std::endl;
-            pthread_mutex_unlock(&print_lock);
 
             auto new_block = Block(last_hash,height_target,difficulty_target,nonce,crc_res,id,static_cast<int>(timestamp));
             my_server->check_new_block(new_block);
+            pthread_mutex_unlock(&print_lock);
         }
         //the miners mine all the time, therefor while sending
         //the new block to the server it will increase the nonce
@@ -59,9 +59,3 @@ bool Miner::mined_success(unsigned int crc_res) const
 {
     return ((crc_res >> (32-difficulty_target)) == 0);
 }
-
-/*
-int Miner::get_id() const
-{
-    return id;
-}*/

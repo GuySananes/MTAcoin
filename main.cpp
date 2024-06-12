@@ -34,7 +34,7 @@ int main(int argc, char* argv[])
 
     pthread_t server_thread, real_miner[NUMBERS_OF_MINERS], fake_miner_thread; // The fake miner will send wrong answers sometimes.
 
-    Server* server = new Server(16); // 1 server
+    Server* server = new Server(2); // 1 server
     Miner* miners[NUMBERS_OF_MINERS]; // 5 miners -> the 5th is the fake_miner.
 
     for (int i = 0; i < NUMBERS_OF_MINERS; ++i)

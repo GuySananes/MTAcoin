@@ -16,16 +16,18 @@ private:
 
 public:
     Block();// empty constructor
-    Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash,int relayed_by,int timestamp);
-    Block(const Block& block)=default;
-    void set_difficulty(int difficulty);
-    int get_difficulty();
-    int get_height();
-    int get_relayed_by();
-    int get_nonce();
-    unsigned int get_hash();
-    unsigned int get_prev_hash();
-    int get_timestamp();
+    Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash,int relayed_by,int timestamp);//constructor
+    Block(const Block& block) = default;//copy constructor
+    //get methods
+    int get_difficulty() const;
+    int get_height() const;
+    int get_relayed_by() const;
+    int get_nonce() const;
+    unsigned int get_hash() const;
+    unsigned int get_prev_hash() const;
+    int get_timestamp() const;
+    //set method
+    void set_difficulty(int difficulty_);
 
 }; 
 

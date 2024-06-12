@@ -24,38 +24,37 @@ Block::Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash
 }
 
 
-//getters and setters.
-
-unsigned int Block::get_hash()
+//get methods
+unsigned int Block::get_hash() const
  {
     return hash;
  }
-int Block::get_difficulty()
+int Block::get_difficulty() const
 {
     return difficulty;
 }
-int Block::get_height()
+int Block::get_height() const
 {
     return height;
 }
-void Block::set_difficulty(int difficulty)
-{
-    this->difficulty=difficulty;
-}
-int Block::get_relayed_by()
-
+int Block::get_relayed_by() const
 {
     return relayed_by;
 } 
-int Block::get_nonce()
+int Block::get_nonce() const
 {
     return nonce; 
 }
-unsigned int Block::get_prev_hash()
+unsigned int Block::get_prev_hash() const
 {
     return prev_hash;
 }
-int Block::get_timestamp()
+int Block::get_timestamp() const
 {
     return timestamp;
+}
+//set method
+void Block::set_difficulty(int difficulty_)
+{
+    this->difficulty=difficulty_;
 }
