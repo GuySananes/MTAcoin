@@ -28,9 +28,9 @@ public:
     void update_target_parameters();
 
     virtual void start_mining(); //should be a virtual func for the dumb-miner
-    bool mined_success(const unsigned int crc_res) const;
+    bool mined_success(unsigned int crc_res) const;
     unsigned int calculate_hash_code();
-    int get_id();
+    int get_id() const;
     
 };
 

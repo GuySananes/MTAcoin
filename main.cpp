@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
     //pthread_mutex_init(&mutex, nullptr);
     //pthread_cond_init(&cond, nullptr);
 
-    Server* server = new Server(16); // 1 server
+    Server* server = new Server(10); // 1 server
     Miner* miners[NUMBERS_OF_MINERS]; // 5 miners -> the 5th is the fake_miner.
 
     for (int i = 0; i < NUMBERS_OF_MINERS; ++i)

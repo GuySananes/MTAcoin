@@ -2,16 +2,9 @@
 #include "server.h"
 #include <iostream>
 
-/*
-//static
-std::list<Block> Server::block_chain;
-Block Server::next_block; //first dummy block. start of the chain , height is 1 
-*/
-
-
 void* Server::server_thread_start(void* arg)
 {
-    Server* server= static_cast<Server*>(arg); 
+    auto* server= static_cast<Server*>(arg);
     server->start();
     return nullptr; //only for the void* to work. it won't return null ever.
 }
@@ -24,8 +17,6 @@ Server::Server(int difficulty_target) : difficulty_target(difficulty_target)
     next_block.set_difficulty(difficulty_target);
     block_chain.push_front(next_block);
     pthread_mutex_unlock(&bl_lock);
-    //bit_mask = mask_hash_validation(difficulty_target);
-
 }
 
 void Server::print_last_block(Block& block_added)
@@ -39,17 +30,17 @@ void Server::print_last_block(Block& block_added)
 
 bool Server::verify_proof_of_work_(Block& block_to_check)
 {
-    if(block_to_check.get_difficulty()!=difficulty_target)
+    if(block_to_check.get_difficulty() != difficulty_target)
     {
         std::cout<<"The Difficulty is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
     }
-    else if(block_to_check.get_height()!=number_of_blocks+1)
+    else if(block_to_check.get_height() != number_of_blocks+1)
     {
         std::cout<<"Server: The Height is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
     }
-    else if(block_to_check.get_prev_hash()!=block_chain.front().get_hash())
+    else if(block_to_check.get_prev_hash() != block_chain.front().get_hash())
     {
         std::cout<<"Server: The prev_hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
@@ -59,7 +50,7 @@ bool Server::verify_proof_of_work_(Block& block_to_check)
         hash(block_to_check.get_height(),block_to_check.get_nonce(),(block_to_check.get_timestamp()),
              block_to_check.get_prev_hash(),block_to_check.get_relayed_by());
     
-    if(hash_test!=block_to_check.get_hash())
+    if(hash_test != block_to_check.get_hash())
     {
         std::cout<<"Server: The Hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
@@ -88,18 +79,18 @@ void Server::add_block_(Block & block_to_add) //adding to block_chain. making su
     pthread_mutex_unlock(&bl_lock);
 }
 
-void Server::start()
+[[noreturn]] void Server::start()
 {    
     while(true)
     {
-        pthread_mutex_lock(&bl_lock);
-        pthread_cond_wait(&cond,&bl_lock); //waiting for a block to check
+        pthread_mutex_lock(&mutex);
+        pthread_cond_wait(&cond,&mutex); //waiting for a block to check
         Block curr_block_to_check = next_block; //copying the block
 
         if(verify_proof_of_work_(curr_block_to_check))
             add_block_(curr_block_to_check);
 
-        pthread_mutex_unlock(&bl_lock);
+        pthread_mutex_unlock(&mutex);
     }
 }
 
@@ -118,12 +109,12 @@ int Server::get_latest_block_height() {
     return res;
 }
 
-int Server::get_latest_block_timestamp() {
+/*int Server::get_latest_block_timestamp() {
     pthread_mutex_lock(&bl_lock);
     auto res = block_chain.front().get_timestamp();
     pthread_mutex_unlock(&bl_lock);
     return res;
-}
+}*/
 
 unsigned int Server::get_latest_block_hash() {
     pthread_mutex_lock(&bl_lock);
@@ -132,12 +123,12 @@ unsigned int Server::get_latest_block_hash() {
     return res;
 }
 
-unsigned int Server::get_latest_block_prev_hash() {
+/*unsigned int Server::get_latest_block_prev_hash() {
     pthread_mutex_lock(&bl_lock);
     auto res = block_chain.front().get_prev_hash();
     pthread_mutex_unlock(&bl_lock);
     return res;
-}
+}*/
 
 int Server::get_latest_block_difficulty() {
     pthread_mutex_lock(&bl_lock);
@@ -146,6 +137,7 @@ int Server::get_latest_block_difficulty() {
     return res;
 }
 
+/*
 int Server::get_latest_block_nonce() {
     pthread_mutex_lock(&bl_lock);
     auto res = block_chain.front().get_nonce();
@@ -159,4 +151,5 @@ int Server::get_latest_block_relayed_by() {
     pthread_mutex_unlock(&bl_lock);
     return res;
 }
+*/
 

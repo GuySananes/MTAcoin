@@ -52,16 +52,16 @@ void Miner::start_mining() //need thread things.
         //the miners mine all the time, therefor while sending
         //the new block to the server it will increase the nonce
         //to try different nonce
-            ++nonce;
+        ++nonce;
     } 
 }
 
-bool Miner::mined_success(const unsigned int crc_res) const
+bool Miner::mined_success(unsigned int crc_res) const
 {
     return ((crc_res >> (32-difficulty_target)) == 0);
 }
 
-int Miner::get_id()
+int Miner::get_id() const
 {
     return id;
 }

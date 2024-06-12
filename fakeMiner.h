@@ -4,7 +4,7 @@
 class fakeMiner : private Miner
 {
     private:
-    unsigned int fake_hash = 0xffffffff; //no seros at all. 
+    unsigned int fake_hash = 0xffffffff; //no zeros at all.
 
     public:
     void start_mining() override;

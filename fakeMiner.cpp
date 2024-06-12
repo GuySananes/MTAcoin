@@ -8,9 +8,9 @@ void fakeMiner::start_mining()
         if(height_target-1 != my_server->get_latest_block_height())
             update_target_parameters();
         
-            std::cout<<"Miner #"<<id
-            <<" mined a new Block #"<<std::dec<<height_target
-            <<", With the hash 0x"<<std::hex<<fake_hash<<std::endl;
+            std::cout << "Miner #" << id
+            << " mined a new Block #" << std::dec << height_target
+            << ", With the hash 0x" << std::hex << fake_hash << std::endl;
             auto new_block = Block(last_hash,height_target,difficulty_target,nonce,fake_hash,id,static_cast<int>(timestamp));
             my_server->check_new_block(new_block);//with mutex
             pthread_cond_signal(&my_server->cond);
