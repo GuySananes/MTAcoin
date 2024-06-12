@@ -17,7 +17,6 @@ private:
 
     //pthread objects
     pthread_mutex_t bl_lock = PTHREAD_MUTEX_INITIALIZER; //block changes lock
-    pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; //server block
     pthread_cond_t cond = PTHREAD_COND_INITIALIZER; //conditional variable
 
 private: //Private functions

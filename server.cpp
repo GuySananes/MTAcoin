@@ -2,17 +2,15 @@
 #include "server.h"
 #include <iostream>
 
-void* Server::server_thread_start(void* arg)
-{
-    auto* server= static_cast<Server*>(arg);
+void *Server::server_thread_start(void *arg) {
+    auto *server = static_cast<Server *>(arg);
     server->start();
     return nullptr; //only for the void* to work. it won't return null ever.
 }
 
 
 //create one dummy node 
-Server::Server(int difficulty_target) : difficulty_target(difficulty_target)
-{
+Server::Server(int difficulty_target) : difficulty_target(difficulty_target) {
     pthread_mutex_lock(&bl_lock);
     next_block.set_difficulty(difficulty_target);
     block_chain.push_front(next_block);
@@ -29,47 +27,38 @@ void Server::print_last_block_(Block &block_added) {
     pthread_mutex_unlock(&print_lock);
 }
 
-bool Server::verify_proof_of_work_(Block& block_to_check)
-{
+bool Server::verify_proof_of_work_(Block &block_to_check) {
 
-    if(block_to_check.get_difficulty() != difficulty_target)
-    {
+    if (block_to_check.get_difficulty() != difficulty_target) {
         pthread_mutex_lock(&print_lock);
-        std::cout<<"The Difficulty is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
+        std::cout << "The Difficulty is wrong, Miner #" << block_to_check.get_relayed_by() << std::endl;
         pthread_mutex_unlock(&print_lock);
         return false;
-    }
-    else if(block_to_check.get_height() != number_of_blocks+1)
-    {
+    } else if (block_to_check.get_height() != number_of_blocks + 1) {
         pthread_mutex_lock(&print_lock);
-        std::cout<<"Server: The Height is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
+        std::cout << "Server: The Height is wrong, Miner #" << block_to_check.get_relayed_by() << std::endl;
         pthread_mutex_unlock(&print_lock);
         return false;
-    }
-    else if(block_to_check.get_prev_hash() != block_chain.front().get_hash())
-    {
+    } else if (block_to_check.get_prev_hash() != block_chain.front().get_hash()) {
         pthread_mutex_lock(&print_lock);
-        std::cout<<"Server: The prev_hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
+        std::cout << "Server: The prev_hash is wrong, Miner #" << block_to_check.get_relayed_by() << std::endl;
         pthread_mutex_unlock(&print_lock);
         return false;
     }
 
 
     unsigned int hash_test = //this calculates the hash
-        hash(block_to_check.get_height(),block_to_check.get_nonce(),(block_to_check.get_timestamp()),
-             block_to_check.get_prev_hash(),block_to_check.get_relayed_by());
-    
-    if(hash_test != block_to_check.get_hash())
-    {
+            hash(block_to_check.get_height(), block_to_check.get_nonce(), (block_to_check.get_timestamp()),
+                 block_to_check.get_prev_hash(), block_to_check.get_relayed_by());
+
+    if (hash_test != block_to_check.get_hash()) {
         pthread_mutex_lock(&print_lock);
-        std::cout<<"Server: The Hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
+        std::cout << "Server: The Hash is wrong, Miner #" << block_to_check.get_relayed_by() << std::endl;
         pthread_mutex_unlock(&print_lock);
         return false;
-    }
-    else if((hash_test >> (32-difficulty_target)) != 0)
-    {
+    } else if ((hash_test >> (32 - difficulty_target)) != 0) {
         pthread_mutex_lock(&print_lock);
-        std::cout<<"Server: The Hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
+        std::cout << "Server: The Hash is wrong, Miner #" << block_to_check.get_relayed_by() << std::endl;
         pthread_mutex_unlock(&print_lock);
         return false;
     }
@@ -78,31 +67,25 @@ bool Server::verify_proof_of_work_(Block& block_to_check)
 }
 
 
-void Server::add_block_(Block & block_to_add) //adding to block_chain. making sure that its secure
+void Server::add_block_(Block &block_to_add) //adding to block_chain. making sure that its secure
 {
-   // pthread_mutex_lock(&bl_lock);
     block_chain.push_front(block_to_add);
     ++number_of_blocks;
     //calling the print function 
     print_last_block_(block_to_add);
-    if(block_chain.size() == MAX_CHAIN_SIZE)
-    {
+    if (block_chain.size() == MAX_CHAIN_SIZE)
         block_chain.pop_back();
-    }
-    //pthread_mutex_unlock(&bl_lock);
 }
 
-[[noreturn]] void Server::start()
-{    
-    while(true)
-    {
+[[noreturn]] void Server::start() {
+    while (true) {
         pthread_mutex_lock(&bl_lock);
-        pthread_cond_wait(&cond,&bl_lock); //waiting for a block to check
+        pthread_cond_wait(&cond, &bl_lock); //waiting for a block to check
 
         Block curr_block_to_check = next_block; //copying the block
 
         //std::cout << "checking miner["<<curr_block_to_check.get_relayed_by()<<"]hash="<<curr_block_to_check.get_hash()<<std::endl;
-        if(verify_proof_of_work_(curr_block_to_check))
+        if (verify_proof_of_work_(curr_block_to_check))
             add_block_(curr_block_to_check);
 
         pthread_mutex_unlock(&bl_lock);
@@ -123,7 +106,6 @@ int Server::get_latest_block_height() {
     pthread_mutex_unlock(&bl_lock);
     return res;
 }
-
 
 
 unsigned int Server::get_latest_block_hash() {
