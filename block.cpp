@@ -22,6 +22,10 @@ Block::Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash
     this->relayed_by=relayed_by;
     this->timestamp = timestamp;
 }
+
+
+//getters and setters.
+
 unsigned int Block::get_hash()
  {
     return hash;

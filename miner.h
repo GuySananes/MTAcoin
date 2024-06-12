@@ -9,21 +9,24 @@
 
 class Miner
 {
-private:
+protected:
     int id;
-    int difficulty_target{};
-    unsigned int last_hash{};
-    int height_target{};
+    int difficulty_target=0;
+    unsigned int last_hash=0;
+    int height_target=1;
     int nonce=0;
-    unsigned int mask{};
-    time_t timestamp{};
+    unsigned int mask=1;
+    time_t timestamp;
     
 public:
 
+    static void* miner_thread_start(void* arg);
+
     Miner(int id);
+
     void update_target_parameters();
 
-    [[noreturn]] void start_mining(); //should be a virtual func for the dumb-miner
+    virtual void start_mining(); //should be a virtual func for the dumb-miner
     bool mined_success(const unsigned int crc_res) const;
     unsigned int calculate_hash_code();
     int get_id();

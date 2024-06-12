@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/home/alon/Desktop/Task2_mtaCoin/build",
+  "command": "/usr/bin/c++    -pthread  -g -std=gnu++14 -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/block.cpp.o -c /home/alon/Desktop/Task2_mtaCoin/block.cpp",
+  "file": "/home/alon/Desktop/Task2_mtaCoin/block.cpp",
+  "output": "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/block.cpp.o"
+},
+{
+  "directory": "/home/alon/Desktop/Task2_mtaCoin/build",
+  "command": "/usr/bin/c++    -pthread  -g -std=gnu++14 -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/fakeMiner.cpp.o -c /home/alon/Desktop/Task2_mtaCoin/fakeMiner.cpp",
+  "file": "/home/alon/Desktop/Task2_mtaCoin/fakeMiner.cpp",
+  "output": "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/fakeMiner.cpp.o"
+},
+{
+  "directory": "/home/alon/Desktop/Task2_mtaCoin/build",
+  "command": "/usr/bin/c++    -pthread  -g -std=gnu++14 -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o -c /home/alon/Desktop/Task2_mtaCoin/genera.cpp",
+  "file": "/home/alon/Desktop/Task2_mtaCoin/genera.cpp",
+  "output": "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o"
+},
+{
+  "directory": "/home/alon/Desktop/Task2_mtaCoin/build",
+  "command": "/usr/bin/c++    -pthread  -g -std=gnu++14 -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/main.cpp.o -c /home/alon/Desktop/Task2_mtaCoin/main.cpp",
+  "file": "/home/alon/Desktop/Task2_mtaCoin/main.cpp",
+  "output": "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/main.cpp.o"
+},
+{
+  "directory": "/home/alon/Desktop/Task2_mtaCoin/build",
+  "command": "/usr/bin/c++    -pthread  -g -std=gnu++14 -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/miner.cpp.o -c /home/alon/Desktop/Task2_mtaCoin/miner.cpp",
+  "file": "/home/alon/Desktop/Task2_mtaCoin/miner.cpp",
+  "output": "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/miner.cpp.o"
+},
+{
+  "directory": "/home/alon/Desktop/Task2_mtaCoin/build",
+  "command": "/usr/bin/c++    -pthread  -g -std=gnu++14 -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/server.cpp.o -c /home/alon/Desktop/Task2_mtaCoin/server.cpp",
+  "file": "/home/alon/Desktop/Task2_mtaCoin/server.cpp",
+  "output": "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/server.cpp.o"
+}
+]

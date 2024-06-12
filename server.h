@@ -21,7 +21,7 @@ public:
 
     // Constructor
     Server(int difficulty_target);
-    
+    static void* server_thread_start(void* arg);
     bool verify_proof_of_work(Block & block_to_check);
     void print_last_block(Block& block_added);
     void add_block(Block & block_to_add);

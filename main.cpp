@@ -1,53 +1,46 @@
 
 #include <iostream>
 #include "server.h"
-#include "global.h"
 #include <pthread.h>
 #include "miner.h"
+#include "fakeMiner.h"
 
-#define NUMBERS_OF_MINERS 4
 
-bool flag=false;
+#define NUMBERS_OF_MINERS 5
+
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
 
 
-void* server_thread_start(void* arg)
-{
-    Server* server= static_cast<Server*>(arg);
-    server->start();
-    return nullptr;
-}
-
-void* miner_thread_start(void* arg)
-{
-    Miner* miner= static_cast<Miner*>(arg);
-    miner->start_mining();
-    return nullptr;
-}
 
 int main(int argc,char* argv[])
 {
-    pthread_t server_thread, real_miner[4]; // the fake miner will send wrong answers sometimes.
+    pthread_t server_thread, real_miner[4], fake_miner_thread; // the fake miner will send wrong answers sometimes.
     pthread_mutex_init(&mutex,nullptr);
     pthread_cond_init(&cond,nullptr);
 
-    Server* server = new Server(20) ; //1 server
+    Server* server= new Server(20) ; //1 server
     Miner* miners[NUMBERS_OF_MINERS]; //5 miners -> the 5th is the fake_miner.
 
-    for(int i=0;i<NUMBERS_OF_MINERS-1;++i)
+    for(int i=0;i<NUMBERS_OF_MINERS;++i)
         miners[i]= new Miner(i);
 
-    pthread_create(&server_thread,nullptr,&server_thread_start,server);
+    fakeMiner* fake_miner= new fakeMiner(5);
+    
+    pthread_create(&server_thread,nullptr,&Server::server_thread_start,server);
 
-    for(int i=0;i<NUMBERS_OF_MINERS - 1;++i)
-        pthread_create(&real_miner[i],nullptr,&miner_thread_start,miners[i]);
+    for(int i=0;i<NUMBERS_OF_MINERS;++i)
+        pthread_create(&real_miner[i],nullptr,&Miner::miner_thread_start,miners[i]);
 
+    pthread_create(&fake_miner_thread,nullptr,&Miner::miner_thread_start,fake_miner);
+
+    pthread_join(server_thread,nullptr);
 
     for(int i=0;i<NUMBERS_OF_MINERS-1;++i)
         pthread_join(real_miner[i],nullptr);
 
-
+    pthread_join(fake_miner_thread,nullptr);
+    
     //free/delete all the threads
 
     return 0;
