@@ -35,27 +35,24 @@ void Miner::start_mining()
             update_target_parameters();
         
         unsigned int crc_res = calculate_hash_code(); //this also updates the timestamp
-        bool hit = mined_success(crc_res);
+        //bool hit = mined_success(crc_res);
 
-        if(hit) //update the server "socket" or "mail-box"
+        if((crc_res >> (32-difficulty_target)) == 0) //update the server "socket" or "mail-box"
         {
             pthread_mutex_lock((&print_lock));
             std::cout<<"Miner #"<<id
             <<" mined a new Block #"<<std::dec<<height_target
             <<", With the hash 0x"<<std::hex<<crc_res<<std::endl;
-
+            pthread_mutex_unlock(&print_lock);
+            //update and send block to server
             auto new_block = Block(last_hash,height_target,difficulty_target,nonce,crc_res,id,static_cast<int>(timestamp));
             my_server->check_new_block(new_block);
-            pthread_mutex_unlock(&print_lock);
+
         }
         //the miners mine all the time, therefor while sending
         //the new block to the server it will increase the nonce
         //to try different nonce
         ++nonce;
-    } 
-}
-
-bool Miner::mined_success(unsigned int crc_res) const
-{
-    return ((crc_res >> (32-difficulty_target)) == 0);
+    }
+    sleep(static_cast<unsigned int>(0.1));
 }

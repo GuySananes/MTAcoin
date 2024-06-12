@@ -15,7 +15,6 @@ private:
     std::list<Block> block_chain;
     Block next_block;
 
-
     //pthread objects
     pthread_mutex_t bl_lock = PTHREAD_MUTEX_INITIALIZER; //block changes lock
     pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; //server block
@@ -29,11 +28,10 @@ private: //Private functions
 public:
     // Constructor
     explicit Server(int difficulty_target);
-
+    //Member functions
     static void* server_thread_start(void* arg);
     [[noreturn]] void start();
     void check_new_block(Block &new_block);
-
     //Block data getters
     int get_latest_block_height();
     unsigned int get_latest_block_hash();
