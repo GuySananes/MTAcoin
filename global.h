@@ -7,9 +7,9 @@
 
 extern pthread_mutex_t mutex;
 extern pthread_cond_t cond;
-extern bool flag; //if the server is checking a miner's answer. 
+ 
 
-#define MAX_CHAIN_SIZE 10
+#define MAX_CHAIN_SIZE 100
 
 unsigned int hash(int height,int nonce, time_t timestamp, unsigned int last_hash,int id);
 

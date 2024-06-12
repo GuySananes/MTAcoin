@@ -12,5 +12,6 @@ unsigned int hash(int height,int nonce, time_t timestamp, unsigned int last_hash
 
 unsigned int mask_hash_validation(int difficulty)
 {
-    return (1 << difficulty) - 1;
+   unsigned int mask = ~(~0U >> (difficulty+1));
+    return mask; 
 }

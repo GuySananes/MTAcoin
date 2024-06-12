@@ -20,6 +20,7 @@ Server::Server(int difficulty_target) : difficulty_target(difficulty_target)
 {
     next_block.set_difficulty(difficulty_target);
     block_chain.push_front(next_block);
+    bit_mask = mask_hash_validation(difficulty_target);
     
 }
 
@@ -41,7 +42,7 @@ bool Server::verify_proof_of_work(Block& block_to_check)
     }
     else if(block_to_check.get_height()!=number_of_blocks+1)
     {
-        std::cout<<"Server: clThe Height is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
+        std::cout<<"Server: The Height is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
     }
     else if(block_to_check.get_prev_hash()!=block_chain.front().get_hash())
@@ -59,7 +60,7 @@ bool Server::verify_proof_of_work(Block& block_to_check)
         std::cout<<"Server: The Hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
     }
-    else if((hash_test & mask_hash_validation(difficulty_target)) != 0)
+    else if((hash_test & bit_mask) != 0)
     {
         std::cout<<"Server: The Hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
