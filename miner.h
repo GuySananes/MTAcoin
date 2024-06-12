@@ -17,6 +17,7 @@ protected:
     int nonce=0;
     unsigned int mask=1;
     time_t timestamp;
+
     
 public:
 

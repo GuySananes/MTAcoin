@@ -13,6 +13,7 @@ private:
     int number_of_blocks=1;
     int difficulty_target;    
     pthread_mutex_t bl_lock = PTHREAD_MUTEX_INITIALIZER;
+    unsigned int bit_mask = 0;
 
 public:
 
