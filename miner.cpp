@@ -2,8 +2,6 @@
 #include "miner.h"
 #include <pthread.h>
 
-
-
 void* Miner::miner_thread_start(void* arg)
 {
     Miner* miner= static_cast<Miner*>(arg); 
@@ -20,7 +18,6 @@ void Miner::update_target_parameters()
    difficulty_target = my_server->get_latest_block_difficulty();
    height_target = my_server->get_latest_block_height() +1;
    last_hash = my_server->get_latest_block_hash();
-   //mask = mask_hash_validation(difficulty_target);
    nonce = 0; //init nonce
 }
 
@@ -30,7 +27,7 @@ unsigned int Miner::calculate_hash_code()
     return hash(height_target,nonce,timestamp,last_hash,id);
 }
 
-void Miner::start_mining() //need thread things.
+void Miner::start_mining()
 {
     while(true)
     {   
@@ -42,12 +39,14 @@ void Miner::start_mining() //need thread things.
 
         if(hit) //update the server "socket" or "mail-box"
         {
+            pthread_mutex_lock((&print_lock));
             std::cout<<"Miner #"<<id
             <<" mined a new Block #"<<std::dec<<height_target
             <<", With the hash 0x"<<std::hex<<crc_res<<std::endl;
+            pthread_mutex_unlock(&print_lock);
+
             auto new_block = Block(last_hash,height_target,difficulty_target,nonce,crc_res,id,static_cast<int>(timestamp));
-            my_server->check_new_block(new_block);//with mutex
-            pthread_cond_signal(&my_server->cond);
+            my_server->check_new_block(new_block);
         }
         //the miners mine all the time, therefor while sending
         //the new block to the server it will increase the nonce
@@ -61,7 +60,8 @@ bool Miner::mined_success(unsigned int crc_res) const
     return ((crc_res >> (32-difficulty_target)) == 0);
 }
 
+/*
 int Miner::get_id() const
 {
     return id;
-}
+}*/

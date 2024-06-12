@@ -18,6 +18,7 @@ protected:
     time_t timestamp;
     Server *my_server;
 
+    pthread_mutex_t print_lock = PTHREAD_MUTEX_INITIALIZER;
 
 public:
 
@@ -27,10 +28,11 @@ public:
 
     void update_target_parameters();
 
-    virtual void start_mining(); //should be a virtual func for the dumb-miner
+    virtual void start_mining(); //to be overridden by fakeMiner
     bool mined_success(unsigned int crc_res) const;
     unsigned int calculate_hash_code();
-    int get_id() const;
+
+    //int get_id() const;
     
 };
 
