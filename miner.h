@@ -15,8 +15,7 @@ protected:
     unsigned int last_hash=0;
     int height_target=1;
     int nonce=0;
-    unsigned int mask=1;
-    time_t timestamp;
+    int timestamp;
     Server *my_server;
 
 public:

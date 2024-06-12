@@ -1,7 +1,7 @@
 
 #include "server.h"
 #include <iostream>
-
+extern pthread_mutex_t print_lock;
 void *Server::server_thread_start(void *arg) {
     auto *server = static_cast<Server *>(arg);
     server->start();
@@ -11,10 +11,10 @@ void *Server::server_thread_start(void *arg) {
 
 //create one dummy node 
 Server::Server(int difficulty_target) : difficulty_target(difficulty_target) {
-    pthread_mutex_lock(&bl_lock);
     next_block.set_difficulty(difficulty_target);
     block_chain.push_front(next_block);
-    pthread_mutex_unlock(&bl_lock);
+    bl_lock = PTHREAD_MUTEX_INITIALIZER; //block changes lock
+    cond = PTHREAD_COND_INITIALIZER; //conditional variable
 }
 
 void Server::print_last_block_(Block &block_added) {
@@ -84,7 +84,6 @@ void Server::add_block_(Block &block_to_add) //adding to block_chain. making sur
 
         Block curr_block_to_check = next_block; //copying the block
 
-        //std::cout << "checking miner["<<curr_block_to_check.get_relayed_by()<<"]hash="<<curr_block_to_check.get_hash()<<std::endl;
         if (verify_proof_of_work_(curr_block_to_check))
             add_block_(curr_block_to_check);
 

@@ -7,4 +7,4 @@
 
 unsigned int hash(int height,int nonce, time_t timestamp, unsigned int last_hash,int id);
 
-static pthread_mutex_t print_lock = PTHREAD_MUTEX_INITIALIZER;
+void safe_log(std::string &str);

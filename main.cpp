@@ -8,6 +8,8 @@
 
 #define NUMBERS_OF_MINERS 4
 
+pthread_mutex_t print_lock = PTHREAD_MUTEX_INITIALIZER;
+
 struct sched_param max_prio = {sched_get_priority_max(SCHED_FIFO)};
 struct sched_param min_prio = {sched_get_priority_min(SCHED_RR)};
 

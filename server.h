@@ -16,8 +16,8 @@ private:
     Block next_block;
 
     //pthread objects
-    pthread_mutex_t bl_lock = PTHREAD_MUTEX_INITIALIZER; //block changes lock
-    pthread_cond_t cond = PTHREAD_COND_INITIALIZER; //conditional variable
+    pthread_mutex_t bl_lock{};
+    pthread_cond_t cond{};
 
 private: //Private functions
     bool verify_proof_of_work_(Block & block_to_check);

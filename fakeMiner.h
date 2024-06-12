@@ -1,7 +1,7 @@
 #include "miner.h"
 
 
-class fakeMiner : private Miner
+class fakeMiner final : public Miner
 {
     private:
     unsigned int fake_hash = 0xffffffff; //no zeros at all.

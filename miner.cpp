@@ -1,10 +1,10 @@
 
 #include "miner.h"
 #include <pthread.h>
-
+extern pthread_mutex_t print_lock;
 void* Miner::miner_thread_start(void* arg)
 {
-    Miner* miner= static_cast<Miner*>(arg); 
+    auto* miner= static_cast<Miner*>(arg);
     miner->start_mining();
     return nullptr; //only for the void* to work. it won't return null ever.
 }
@@ -43,6 +43,7 @@ void Miner::start_mining()
             std::cout<<"Miner #"<<id
             <<" mined a new Block #"<<std::dec<<height_target
             <<", With the hash 0x"<<std::hex<<crc_res<<std::endl;
+
             pthread_mutex_unlock(&print_lock);
             //update and send block to server
             auto new_block = Block(last_hash,height_target,difficulty_target,nonce,crc_res,id,static_cast<int>(timestamp));
@@ -53,7 +54,7 @@ void Miner::start_mining()
         //the new block to the server it will increase the nonce
         //to try different nonce
         ++nonce;
-        sleep(static_cast<unsigned int>(0.1));
+        //sleep(static_cast<unsigned int>(0.1));
     }
 
 }

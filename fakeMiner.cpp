@@ -1,5 +1,5 @@
 #include "fakeMiner.h"
-
+extern pthread_mutex_t print_lock;
 
 [[noreturn]] void fakeMiner::start_mining()
 {
