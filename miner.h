@@ -2,7 +2,6 @@
 #include <iostream>
 #include "block.h"
 #include "server.h"
-#include <math.h>
 #include <zlib.h>
 #include <ctime>
 #include "global.h"
@@ -17,13 +16,14 @@ protected:
     int nonce=0;
     unsigned int mask=1;
     time_t timestamp;
+    Server *my_server;
 
-    
+
 public:
 
     static void* miner_thread_start(void* arg);
 
-    Miner(int id);
+    Miner(int id_, Server *my_server_);
 
     void update_target_parameters();
 

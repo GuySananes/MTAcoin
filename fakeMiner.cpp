@@ -5,14 +5,15 @@ void fakeMiner::start_mining()
 {
     while(true)
     {   
-        if(height_target-1 != Server::block_chain.front().get_height()) 
+        if(height_target-1 != my_server->get_latest_block_height())
             update_target_parameters();
         
             std::cout<<"Miner #"<<id
             <<" mined a new Block #"<<std::dec<<height_target
             <<", With the hash 0x"<<std::hex<<fake_hash<<std::endl;
-            Server::next_block= Block(last_hash,height_target,difficulty_target,nonce,fake_hash,id,static_cast<int>(timestamp)); 
-            pthread_cond_signal(&cond);
+            auto new_block = Block(last_hash,height_target,difficulty_target,nonce,fake_hash,id,static_cast<int>(timestamp));
+            my_server->check_new_block(new_block);//with mutex
+            pthread_cond_signal(&my_server->cond);
             sleep(1); //1 second delay.
     } 
 }

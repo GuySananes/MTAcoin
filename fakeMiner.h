@@ -8,7 +8,7 @@ class fakeMiner : private Miner
 
     public:
     void start_mining() override;
-    fakeMiner(int id) : Miner(id) {}
+    fakeMiner(int id_, Server* my_server_) : Miner(id_, my_server_) {}
 };
 
 

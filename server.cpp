@@ -2,26 +2,30 @@
 #include "server.h"
 #include <iostream>
 
+/*
 //static
 std::list<Block> Server::block_chain;
 Block Server::next_block; //first dummy block. start of the chain , height is 1 
+*/
 
 
 void* Server::server_thread_start(void* arg)
 {
     Server* server= static_cast<Server*>(arg); 
     server->start();
-    return nullptr; //only for the void* to work. it wount return null ever.
+    return nullptr; //only for the void* to work. it won't return null ever.
 }
 
 
 //create one dummy node 
 Server::Server(int difficulty_target) : difficulty_target(difficulty_target)
 {
+    pthread_mutex_lock(&bl_lock);
     next_block.set_difficulty(difficulty_target);
     block_chain.push_front(next_block);
-    bit_mask = mask_hash_validation(difficulty_target);
-    
+    pthread_mutex_unlock(&bl_lock);
+    //bit_mask = mask_hash_validation(difficulty_target);
+
 }
 
 void Server::print_last_block(Block& block_added)
@@ -33,7 +37,7 @@ void Server::print_last_block(Block& block_added)
                      << block_added.get_nonce() << ")" << std::endl;
 }
 
-bool Server::verify_proof_of_work(Block& block_to_check)
+bool Server::verify_proof_of_work_(Block& block_to_check)
 {
     if(block_to_check.get_difficulty()!=difficulty_target)
     {
@@ -51,7 +55,7 @@ bool Server::verify_proof_of_work(Block& block_to_check)
         return false;
     }
 
-    unsigned int hash_test = //this calculates the hash, again.. :) 
+    unsigned int hash_test = //this calculates the hash
         hash(block_to_check.get_height(),block_to_check.get_nonce(),(block_to_check.get_timestamp()),
              block_to_check.get_prev_hash(),block_to_check.get_relayed_by());
     
@@ -70,7 +74,7 @@ bool Server::verify_proof_of_work(Block& block_to_check)
 }
 
 
-void Server::add_block(Block & block_to_add) //adding to block_chain. making sure that its secure
+void Server::add_block_(Block & block_to_add) //adding to block_chain. making sure that its secure
 {
     pthread_mutex_lock(&bl_lock);
     block_chain.push_front(block_to_add);
@@ -88,13 +92,71 @@ void Server::start()
 {    
     while(true)
     {
-        pthread_mutex_lock(&mutex);
-        pthread_cond_wait(&cond,&mutex); //waiting for a block to check
+        pthread_mutex_lock(&bl_lock);
+        pthread_cond_wait(&cond,&bl_lock); //waiting for a block to check
         Block curr_block_to_check = next_block; //copying the block
 
-        if(verify_proof_of_work(curr_block_to_check))
-            add_block(curr_block_to_check);
+        if(verify_proof_of_work_(curr_block_to_check))
+            add_block_(curr_block_to_check);
 
-        pthread_mutex_unlock(&mutex);
+        pthread_mutex_unlock(&bl_lock);
     }
 }
+
+void Server::check_new_block(Block &new_block) {
+    pthread_mutex_lock(&bl_lock);
+    next_block = new_block; //we can change it to queue
+    pthread_cond_signal(&cond); //notify the Server::start function to apply
+    pthread_mutex_unlock(&bl_lock);
+}
+
+//Block data getters
+int Server::get_latest_block_height() {
+    pthread_mutex_lock(&bl_lock);
+    auto res = block_chain.front().get_height();
+    pthread_mutex_unlock(&bl_lock);
+    return res;
+}
+
+int Server::get_latest_block_timestamp() {
+    pthread_mutex_lock(&bl_lock);
+    auto res = block_chain.front().get_timestamp();
+    pthread_mutex_unlock(&bl_lock);
+    return res;
+}
+
+unsigned int Server::get_latest_block_hash() {
+    pthread_mutex_lock(&bl_lock);
+    auto res = block_chain.front().get_hash();
+    pthread_mutex_unlock(&bl_lock);
+    return res;
+}
+
+unsigned int Server::get_latest_block_prev_hash() {
+    pthread_mutex_lock(&bl_lock);
+    auto res = block_chain.front().get_prev_hash();
+    pthread_mutex_unlock(&bl_lock);
+    return res;
+}
+
+int Server::get_latest_block_difficulty() {
+    pthread_mutex_lock(&bl_lock);
+    auto res = block_chain.front().get_difficulty();
+    pthread_mutex_unlock(&bl_lock);
+    return res;
+}
+
+int Server::get_latest_block_nonce() {
+    pthread_mutex_lock(&bl_lock);
+    auto res = block_chain.front().get_nonce();
+    pthread_mutex_unlock(&bl_lock);
+    return res;
+}
+
+int Server::get_latest_block_relayed_by() {
+    pthread_mutex_lock(&bl_lock);
+    auto res = block_chain.front().get_relayed_by();
+    pthread_mutex_unlock(&bl_lock);
+    return res;
+}
+
