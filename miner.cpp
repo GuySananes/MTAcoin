@@ -56,7 +56,7 @@ void Miner::start_mining() //need thread things.
 
 bool Miner::mined_success(const unsigned int crc_res) const
 {
-    return ((crc_res & mask) == 0);
+    return ((crc_res >> (32-difficulty_target)) == 0);
 }
 
 int Miner::get_id()

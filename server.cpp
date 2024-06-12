@@ -60,7 +60,7 @@ bool Server::verify_proof_of_work(Block& block_to_check)
         std::cout<<"Server: The Hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
     }
-    else if((hash_test & bit_mask) != 0)
+    else if((hash_test >> (32-difficulty_target)) != 0)
     {
         std::cout<<"Server: The Hash is wrong, Miner #"<<block_to_check.get_relayed_by()<<std::endl;
         return false;
