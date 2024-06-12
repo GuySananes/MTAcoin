@@ -8,7 +8,7 @@ void* Miner::miner_thread_start(void* arg)
 {
     Miner* miner= static_cast<Miner*>(arg); 
     miner->start_mining();
-    return nullptr; //only for the void* to work. it wount return null ever.
+    return nullptr; //only for the void* to work. it wont return null ever.
 }
 
 Miner::Miner(int id):id(id){}
@@ -26,7 +26,7 @@ void Miner::update_target_parameters()
 
 unsigned int Miner::calculate_hash_code()
 {
-    timestamp = std::time(nullptr); //take the currect time since 1970 (unix epoch)
+    timestamp = std::time(nullptr); //take the current time since 1970 (unix epoch)
     return hash(height_target,nonce,timestamp,last_hash,id);
 }
 
