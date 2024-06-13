@@ -17,6 +17,6 @@ extern pthread_mutex_t print_lock;
         auto new_block = Block(last_hash,height_target,difficulty_target,nonce,fake_hash,id,static_cast<int>(timestamp));
         pthread_mutex_unlock(&print_lock);
         my_server->check_new_block(new_block);
-        sleep(1); //1 second delay.
+        sleep(1); //1 second delay. 
     } 
 }

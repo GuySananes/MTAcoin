@@ -9,6 +9,4 @@
 
 unsigned int hash(int height,int nonce, time_t timestamp, unsigned int last_hash,int id);
 
-//void safe_log(std::string &str); not sure we need that.
-
 void processArguments(int number_of_arguments, char* the_arguments[]);

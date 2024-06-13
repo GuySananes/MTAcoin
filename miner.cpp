@@ -54,7 +54,6 @@ void Miner::start_mining()
         //the new block to the server it will increase the nonce
         //to try different nonce
         ++nonce;
-        //sleep(static_cast<unsigned int>(0.1));
     }
 
 }
