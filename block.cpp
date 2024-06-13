@@ -23,7 +23,6 @@ Block::Block(unsigned int prev_hash,int height,int difficulty,int nonce,int hash
     this->timestamp = timestamp;
 }
 
-
 //get methods
 unsigned int Block::get_hash() const
  {

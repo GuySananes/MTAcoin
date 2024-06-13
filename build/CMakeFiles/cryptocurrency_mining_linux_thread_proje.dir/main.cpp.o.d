@@ -165,15 +165,6 @@ CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
  /usr/include/linux/close_range.h \
- /home/alon/Desktop/Task2_mtaCoin/global.h /usr/include/c++/13/cmath \
- /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
- /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
- /home/alon/Desktop/Task2_mtaCoin/miner.h /usr/include/c++/13/math.h \
- /usr/include/c++/13/ctime /home/alon/Desktop/Task2_mtaCoin/fakeMiner.h
+ /home/alon/Desktop/Task2_mtaCoin/global.h \
+ /home/alon/Desktop/Task2_mtaCoin/miner.h /usr/include/c++/13/ctime \
+ /home/alon/Desktop/Task2_mtaCoin/fakeMiner.h
