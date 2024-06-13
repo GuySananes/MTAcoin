@@ -8,7 +8,7 @@
 
 #define NUMBERS_OF_MINERS 4
 #define SERVER_PRIORITY 20
-
+//global print_block
 pthread_mutex_t print_lock = PTHREAD_MUTEX_INITIALIZER;
 
 struct sched_param max_prio = {sched_get_priority_max(SCHED_FIFO)};
@@ -57,7 +57,6 @@ int main(int argc, char* argv[])
     pthread_join(fake_miner_thread, nullptr);
     
     //Delete dynamically allocated objects 
-
     delete server;
     delete fake_miner;
     for (int i = 0; i < NUMBERS_OF_MINERS; ++i)

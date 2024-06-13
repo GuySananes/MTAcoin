@@ -14,7 +14,7 @@ add_executable(cryptocurrency_mining_linux_thread_proje
         block.h
         fakeMiner.cpp
         fakeMiner.h
-        genera.cpp
+        global.cpp
         global.h
         main.cpp
         miner.cpp

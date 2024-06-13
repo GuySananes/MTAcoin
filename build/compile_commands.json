@@ -13,9 +13,9 @@
 },
 {
   "directory": "/home/alon/Desktop/Task2_mtaCoin/build",
-  "command": "/usr/bin/c++    -pthread  -g -std=gnu++14 -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o -c /home/alon/Desktop/Task2_mtaCoin/genera.cpp",
-  "file": "/home/alon/Desktop/Task2_mtaCoin/genera.cpp",
-  "output": "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o"
+  "command": "/usr/bin/c++    -pthread  -g -std=gnu++14 -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o -c /home/alon/Desktop/Task2_mtaCoin/global.cpp",
+  "file": "/home/alon/Desktop/Task2_mtaCoin/global.cpp",
+  "output": "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o"
 },
 {
   "directory": "/home/alon/Desktop/Task2_mtaCoin/build",

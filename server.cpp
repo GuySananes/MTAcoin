@@ -1,7 +1,8 @@
 
 #include "server.h"
-#include <iostream>
+
 extern pthread_mutex_t print_lock;
+
 void *Server::server_thread_start(void *arg) {
     auto *server = static_cast<Server *>(arg);
     server->start();
@@ -28,6 +29,7 @@ void Server::print_last_block_(Block &block_added) {
 }
 
 bool Server::verify_proof_of_work_(Block &block_to_check) {
+    //using the global print_lock
 
     if (block_to_check.get_difficulty() != difficulty_target) {
         pthread_mutex_lock(&print_lock);
@@ -74,7 +76,7 @@ void Server::add_block_(Block &block_to_add) //adding to block_chain. making sur
     //calling the print function 
     print_last_block_(block_to_add);
     if (block_chain.size() == MAX_CHAIN_SIZE)
-        block_chain.pop_back();
+        block_chain.pop_back(); //deleting the first block
 }
 
 [[noreturn]] void Server::start() {

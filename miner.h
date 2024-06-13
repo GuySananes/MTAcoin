@@ -5,7 +5,7 @@
 #include <zlib.h>
 #include <ctime>
 #include "global.h"
-
+#include <pthread.h>
 class Miner
 {
 protected:

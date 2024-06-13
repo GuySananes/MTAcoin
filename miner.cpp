@@ -1,6 +1,6 @@
 
 #include "miner.h"
-#include <pthread.h>
+
 extern pthread_mutex_t print_lock;
 void* Miner::miner_thread_start(void* arg)
 {
@@ -27,6 +27,7 @@ unsigned int Miner::calculate_hash_code()
     return hash(height_target,nonce,timestamp,last_hash,id);
 }
 
+
 void Miner::start_mining()
 {
     while(true)
@@ -35,8 +36,7 @@ void Miner::start_mining()
             update_target_parameters();
         
         unsigned int crc_res = calculate_hash_code(); //this also updates the timestamp
-        //bool hit = mined_success(crc_res);
-
+        //if the miner hits the right hash:
         if((crc_res >> (32-difficulty_target)) == 0) //update the server "socket" or "mail-box"
         {
             pthread_mutex_lock((&print_lock));

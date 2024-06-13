@@ -97,19 +97,19 @@ CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/fakeMiner.cpp.s: cmake_f
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/fakeMiner.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alon/Desktop/Task2_mtaCoin/fakeMiner.cpp -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/fakeMiner.cpp.s
 
-CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/flags.make
-CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o: /home/alon/Desktop/Task2_mtaCoin/genera.cpp
-CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alon/Desktop/Task2_mtaCoin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o -MF CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o.d -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o -c /home/alon/Desktop/Task2_mtaCoin/genera.cpp
+CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/flags.make
+CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o: /home/alon/Desktop/Task2_mtaCoin/global.cpp
+CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/alon/Desktop/Task2_mtaCoin/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o -MF CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o.d -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o -c /home/alon/Desktop/Task2_mtaCoin/global.cpp
 
-CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alon/Desktop/Task2_mtaCoin/genera.cpp > CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.i
+CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alon/Desktop/Task2_mtaCoin/global.cpp > CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.i
 
-CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alon/Desktop/Task2_mtaCoin/genera.cpp -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.s
+CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alon/Desktop/Task2_mtaCoin/global.cpp -o CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.s
 
 CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/main.cpp.o: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/flags.make
 CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/main.cpp.o: /home/alon/Desktop/Task2_mtaCoin/main.cpp
@@ -157,7 +157,7 @@ CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/server.cpp.s: cmake_forc
 cryptocurrency_mining_linux_thread_proje_OBJECTS = \
 "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/block.cpp.o" \
 "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/fakeMiner.cpp.o" \
-"CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o" \
+"CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o" \
 "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/main.cpp.o" \
 "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/miner.cpp.o" \
 "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/server.cpp.o"
@@ -167,7 +167,7 @@ cryptocurrency_mining_linux_thread_proje_EXTERNAL_OBJECTS =
 
 cryptocurrency_mining_linux_thread_proje: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/block.cpp.o
 cryptocurrency_mining_linux_thread_proje: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/fakeMiner.cpp.o
-cryptocurrency_mining_linux_thread_proje: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o
+cryptocurrency_mining_linux_thread_proje: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o
 cryptocurrency_mining_linux_thread_proje: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/main.cpp.o
 cryptocurrency_mining_linux_thread_proje: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/miner.cpp.o
 cryptocurrency_mining_linux_thread_proje: CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/server.cpp.o

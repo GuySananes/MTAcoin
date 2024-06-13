@@ -10,7 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/alon/Desktop/Task2_mtaCoin/block.cpp" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/block.cpp.o" "gcc" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/block.cpp.o.d"
   "/home/alon/Desktop/Task2_mtaCoin/fakeMiner.cpp" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/fakeMiner.cpp.o" "gcc" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/fakeMiner.cpp.o.d"
-  "/home/alon/Desktop/Task2_mtaCoin/genera.cpp" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o" "gcc" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o.d"
+  "/home/alon/Desktop/Task2_mtaCoin/global.cpp" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o" "gcc" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o.d"
   "/home/alon/Desktop/Task2_mtaCoin/main.cpp" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/main.cpp.o" "gcc" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/main.cpp.o.d"
   "/home/alon/Desktop/Task2_mtaCoin/miner.cpp" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/miner.cpp.o" "gcc" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/miner.cpp.o.d"
   "/home/alon/Desktop/Task2_mtaCoin/server.cpp" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/server.cpp.o" "gcc" "CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/server.cpp.o.d"

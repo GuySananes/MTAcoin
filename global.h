@@ -2,6 +2,8 @@
 #include <pthread.h>
 #include <zlib.h>
 #include <string>
+#include "zlib.h"
+#include <iostream>
 
 #define MAX_CHAIN_SIZE 100
 

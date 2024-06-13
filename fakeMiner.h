@@ -1,6 +1,5 @@
 #include "miner.h"
 
-
 class fakeMiner final : public Miner
 {
     private:

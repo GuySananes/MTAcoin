@@ -177,29 +177,29 @@ fakeMiner.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/build.make CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/fakeMiner.cpp.s
 .PHONY : fakeMiner.cpp.s
 
-genera.o: genera.cpp.o
-.PHONY : genera.o
+global.o: global.cpp.o
+.PHONY : global.o
 
 # target to build an object file
-genera.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/build.make CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.o
-.PHONY : genera.cpp.o
+global.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/build.make CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.o
+.PHONY : global.cpp.o
 
-genera.i: genera.cpp.i
-.PHONY : genera.i
+global.i: global.cpp.i
+.PHONY : global.i
 
 # target to preprocess a source file
-genera.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/build.make CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.i
-.PHONY : genera.cpp.i
+global.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/build.make CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.i
+.PHONY : global.cpp.i
 
-genera.s: genera.cpp.s
-.PHONY : genera.s
+global.s: global.cpp.s
+.PHONY : global.s
 
 # target to generate assembly for a file
-genera.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/build.make CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/genera.cpp.s
-.PHONY : genera.cpp.s
+global.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/build.make CMakeFiles/cryptocurrency_mining_linux_thread_proje.dir/global.cpp.s
+.PHONY : global.cpp.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -288,9 +288,9 @@ help:
 	@echo "... fakeMiner.o"
 	@echo "... fakeMiner.i"
 	@echo "... fakeMiner.s"
-	@echo "... genera.o"
-	@echo "... genera.i"
-	@echo "... genera.s"
+	@echo "... global.o"
+	@echo "... global.i"
+	@echo "... global.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

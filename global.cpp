@@ -1,6 +1,4 @@
 #include "global.h"
-#include "zlib.h"
-#include <iostream>
 
 unsigned int hash(int height,int nonce, time_t timestamp, unsigned int last_hash,int id)
 {
@@ -19,9 +17,9 @@ void processArguments(int number_of_arguments, char* the_arguments[]) {
         
         int difficulty = std::stoi(the_arguments[1]);
 
-        if (difficulty < 0) 
+        if (difficulty <= 0) 
         {
-            throw std::string("Difficulty cannot be negative***\nPlease run the program again with difficulty number.\n");
+            throw std::string("Difficulty has to be positive!***\nPlease run the program again with difficulty number.\n");
         }
 
         } 
