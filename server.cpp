@@ -1,4 +1,3 @@
-
 #include "server.h"
 
 extern pthread_mutex_t print_lock;
@@ -18,13 +17,18 @@ Server::Server(int difficulty_target) : difficulty_target(difficulty_target) {
     cond = PTHREAD_COND_INITIALIZER; //conditional variable
 }
 
+Server::~Server() {
+    pthread_mutex_destroy(&bl_lock);
+    pthread_cond_destroy(&cond);
+}
+
 void Server::print_last_block_(Block &block_added) {
     pthread_mutex_lock(&print_lock);
     std::cout << "Server: New block added by Miner #" << std::dec << block_added.get_relayed_by()
-              << ", height(" << std::dec << block_added.get_height() << "), timestamp(" << block_added.get_timestamp()
-              << "), hash(0x" << std::hex << block_added.get_hash() << std::dec << "), prev_hash(0x"
-              << std::hex << block_added.get_prev_hash() << std::dec << "), nonce("
-              << block_added.get_nonce() << ")" << std::endl;
+            << ", height(" << std::dec << block_added.get_height() << "), timestamp(" << block_added.get_timestamp()
+            << "), hash(0x" << std::hex << block_added.get_hash() << std::dec << "), prev_hash(0x"
+            << std::hex << block_added.get_prev_hash() << std::dec << "), nonce("
+            << block_added.get_nonce() << ")" << std::endl;
     pthread_mutex_unlock(&print_lock);
 }
 
